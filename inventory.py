@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from models import Shoe
-from storage import load_inventory, save_inventory
+from data_storage import load_inventory, save_inventory
 
 
 class InventoryManager:
