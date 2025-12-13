@@ -24,7 +24,6 @@ class InventoryApp(tk.Tk):
         self.geometry("700x500")
         self.minsize(700, 500)
 
-        # Input fields
         self.brand_var = tk.StringVar()
         self.model_var = tk.StringVar()
         self.size_var = tk.StringVar()
