@@ -1,9 +1,7 @@
 """
 main.py
-Starts inventory manager
+Application entry point.
 """
-
-from __future__ import annotations
 
 from pathlib import Path
 
@@ -12,9 +10,9 @@ from gui import InventoryApp
 
 
 def main() -> None:
-    csv_path = Path(__file__).parent / "inventory.csv"
-    manager = InventoryManager(csv_path=csv_path)
-    app = InventoryApp(manager=manager)
+    csv_path = Path("inventory.csv")
+    manager = InventoryManager(csv_path)
+    app = InventoryApp(manager)
     app.mainloop()
 
 
