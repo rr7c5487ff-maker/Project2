@@ -12,7 +12,7 @@ from models import Shoe
 
 class InventoryManager:
     """
-    Manages shoe inventory stored in a CSV file.
+    Manages shoe inventory stored in CSV file.
     """
 
     def __init__(self, csv_path: Path) -> None:
@@ -59,7 +59,7 @@ class InventoryManager:
 
     def remove_shoe(self, index: int) -> None:
         """
-        Remove a shoe by index.
+        Remove a shoe.
         """
         self.shoes.pop(index)
         self.save_inventory()
