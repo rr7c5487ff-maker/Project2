@@ -16,7 +16,7 @@ CSV_HEADERS: list[str] = ["brand", "model", "size", "color"]
 
 def ensure_csv_exists(csv_path: Path) -> None:
     """
-    Ensure the CSV file exists.
+    Ensure CSV file exists.
     """
     if not csv_path.exists():
         csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -28,16 +28,6 @@ def ensure_csv_exists(csv_path: Path) -> None:
 def load_inventory(csv_path: Path) -> List[Shoe]:
     """
     Load shoes from the CSV file.
-
-    Args:
-        csv_path (Path): Path to the inventory CSV.
-
-    Returns:
-        List[Shoe]: List of Shoe objects loaded from CSV.
-
-    Raises:
-        ValueError if CSV rows contain invalid data.
-        OSError if the file can't be read.
     """
     ensure_csv_exists(csv_path)
 
@@ -45,7 +35,7 @@ def load_inventory(csv_path: Path) -> List[Shoe]:
     with csv_path.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         if reader.fieldnames is None:
-            raise ValueError("CSV file is missing headers.")
+            raise ValueError("CSV file missing headers.")
 
         for i, row in enumerate(reader, start=2):
             try:
@@ -55,7 +45,7 @@ def load_inventory(csv_path: Path) -> List[Shoe]:
                 size_str = (row.get("size") or "").strip()
 
                 if not brand or not model or not color or not size_str:
-                    raise ValueError("Missing one or more required fields.")
+                    raise ValueError("Missing required fields.")
 
                 size = float(size_str)
                 shoes.append(Shoe(brand=brand, model=model, size=size, color=color))
@@ -68,13 +58,6 @@ def load_inventory(csv_path: Path) -> List[Shoe]:
 def save_inventory(csv_path: Path, shoes: List[Shoe]) -> None:
     """
     Save the inventory to the CSV file.
-
-    Args:
-        csv_path (Path): Path to the inventory CSV.
-        shoes (List[Shoe]): Shoes to write.
-
-    Raises:
-        OSError: If file can't be written.
     """
     ensure_csv_exists(csv_path)
 
