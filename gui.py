@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 from models import Shoe
 from inventory import InventoryManager
-# AI HELPED GENERATE TKINTER CODE, ASSISTED IN FIRST FUNCTION MOSTLY
+# AI HELPED GENERATE TKINTER CODE, ASSISTED IN FIRST & SECOND FUNCTIONS MOSTLY
 
 class InventoryApp(tk.Tk):
     """
@@ -36,10 +36,9 @@ class InventoryApp(tk.Tk):
 
     def _build_ui(self) -> None:
         """
-        Build GUI layout.
+        Layout.
         """
 
-        # --- Add Shoe Frame ---
         add_frame = tk.LabelFrame(self, text="Add Shoe")
         add_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
@@ -59,7 +58,6 @@ class InventoryApp(tk.Tk):
             row=4, column=0, columnspan=2, pady=5
         )
 
-        # --- Inventory List ---
         list_frame = tk.LabelFrame(self, text="Inventory")
         list_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
@@ -73,7 +71,7 @@ class InventoryApp(tk.Tk):
 
     def add_shoe(self) -> None:
         """
-        Add shoe from input fields.
+        Add shoe from input.
         """
         try:
             brand = self.brand_var.get().strip()
@@ -94,11 +92,11 @@ class InventoryApp(tk.Tk):
             self.color_var.set("")
 
         except ValueError:
-            messagebox.showerror("Error", "Invalid input. Please check your values.")
+            messagebox.showerror("Error", "Please check your values.")
 
     def remove_selected(self) -> None:
         """
-        Remove selected shoe.
+        Remove shoe.
         """
         if not self.listbox.curselection():
             messagebox.showinfo("Info", "Select a shoe to remove.")
@@ -110,7 +108,7 @@ class InventoryApp(tk.Tk):
 
     def clear_inventory(self) -> None:
         """
-        Clear entire inventory.
+        Clear inventory.
         """
         if messagebox.askyesno("Confirm", "Clear all inventory?"):
             self.manager.clear_inventory()
@@ -118,7 +116,7 @@ class InventoryApp(tk.Tk):
 
     def refresh_list(self) -> None:
         """
-        Refresh inventory listbox.
+        Refresh inventory.
         """
         self.listbox.delete(0, tk.END)
         for shoe in self.manager.shoes:
