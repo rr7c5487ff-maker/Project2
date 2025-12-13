@@ -1,7 +1,5 @@
 """
-storage.py
-
-Handles reading and writing inventory data to a CSV file.
+Reads and writes to CSV file.
 """
 
 from __future__ import annotations
@@ -18,10 +16,7 @@ CSV_HEADERS: list[str] = ["brand", "model", "size", "color"]
 
 def ensure_csv_exists(csv_path: Path) -> None:
     """
-    Ensure the CSV file exists with headers.
-
-    Args:
-        csv_path (Path): Path to the inventory CSV.
+    Ensure the CSV file exists.
     """
     if not csv_path.exists():
         csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -41,19 +36,18 @@ def load_inventory(csv_path: Path) -> List[Shoe]:
         List[Shoe]: List of Shoe objects loaded from CSV.
 
     Raises:
-        ValueError: If CSV rows contain invalid data.
-        OSError: If the file can't be read.
+        ValueError if CSV rows contain invalid data.
+        OSError if the file can't be read.
     """
     ensure_csv_exists(csv_path)
 
     shoes: List[Shoe] = []
     with csv_path.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        # If file is empty or missing headers, DictReader may behave oddly
         if reader.fieldnames is None:
             raise ValueError("CSV file is missing headers.")
 
-        for i, row in enumerate(reader, start=2):  # start=2 because row 1 is headers
+        for i, row in enumerate(reader, start=2):
             try:
                 brand = (row.get("brand") or "").strip()
                 model = (row.get("model") or "").strip()
@@ -73,7 +67,7 @@ def load_inventory(csv_path: Path) -> List[Shoe]:
 
 def save_inventory(csv_path: Path, shoes: List[Shoe]) -> None:
     """
-    Save the inventory to the CSV file (overwrite).
+    Save the inventory to the CSV file.
 
     Args:
         csv_path (Path): Path to the inventory CSV.
