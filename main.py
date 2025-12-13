@@ -1,6 +1,6 @@
 """
 main.py
-Application entry point.
+Start main app.
 """
 
 from pathlib import Path
